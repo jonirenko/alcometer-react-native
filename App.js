@@ -1,20 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
+import Alcometer from './components/Alcometer';
+import Header from './components/Header';
+import {lightStyle, darkStyle} from './styles/Styles';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <ScrollView contentContainerStyle={lightStyle.container}>
+        <View>
+          <Header/>
+          <Text>Open up App.js to start working on your app!</Text>
+          <Alcometer />
+        </View>
+      </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
