@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Alert, Pressable, Text, View } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import { RadioButton, TextInput } from 'react-native-paper';
 import { lightStyle, darkStyle } from '../styles/Styles';
@@ -9,11 +9,39 @@ export default function Alcometer() {
     const [bottles, setBottles] = useState(0);
     const [hours, setHours] = useState(0);
     const [sex, setSex] = useState('');
+    const [result, setResult] = useState(0);
 
     const LITRES = bottles * 0.33;
     const GRAMS = LITRES * 8 * 4.5;
     const BURNING = weight / 10;
     const GRAMS_LEFT = GRAMS - BURNING * hours;
+
+    const showAlert = () => {
+        Alert.alert(
+            "Input missing: weight",
+            "Unless you are a photon, your weight cannot be 0. Please type in your weight before calculating blood alcohol level.",
+            [
+                {
+                    text: "Ok",
+                }
+            ]
+        );
+    }
+
+    function calculateAlcoholLevel() {
+        if (weight <= 0) {
+            showAlert();
+        } else if (sex === 'male') {
+            let rMale = GRAMS_LEFT / (weight * 0.7);
+            setResult(rMale);
+        } else {
+            let rFemale = GRAMS_LEFT / (weight * 0.6);
+            setResult(rFemale);
+        }
+        if (result < 0) {
+            setResult(0);
+        }
+    }
 
     return (
         <View>
@@ -33,6 +61,13 @@ export default function Alcometer() {
                     <Text>Female</Text>
                 </View>
             </RadioButton.Group>
+            <View>
+                <Text>Your blood alcohol level is</Text>
+                <Text>{result.toFixed(2)}</Text>
+            </View>
+            <Pressable onPress={calculateAlcoholLevel}>
+                <Text>Calculate</Text>
+            </Pressable>
         </View>
     );
 }
