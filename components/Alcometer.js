@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import { RadioButton, TextInput } from 'react-native-paper';
-import { lightStyle, darkStyle } from '../styles/Styles';
+import { lightStyle, darkStyle, resultStyle } from '../styles/Styles';
 
 export default function Alcometer() {
     const [weight, setWeight] = useState(0);
@@ -38,8 +38,26 @@ export default function Alcometer() {
             let rFemale = GRAMS_LEFT / (weight * 0.6);
             setResult(rFemale);
         }
+    }
+
+    function returnResult() {
         if (result < 0) {
             setResult(0);
+            return (
+                <Text style={resultStyle.goodColor}>{result.toFixed(2)}</Text>
+            )
+        } else if (result >= 0 && result < 0.2) {
+            return (
+                <Text style={resultStyle.goodColor}>{result.toFixed(2)}</Text>
+            )
+        } else if (result < 0.5 && result >= 0.2) {
+            return (
+                <Text style={resultStyle.warningColor}>{result.toFixed(2)}</Text>
+            )
+        } else {
+            return (
+                <Text style={resultStyle.badColor}>{result.toFixed(2)}</Text>
+            )
         }
     }
 
@@ -63,7 +81,7 @@ export default function Alcometer() {
             </RadioButton.Group>
             <View>
                 <Text>Your blood alcohol level is</Text>
-                <Text>{result.toFixed(2)}</Text>
+                <Text>{returnResult()}</Text>
             </View>
             <Pressable onPress={calculateAlcoholLevel}>
                 <Text>Calculate</Text>

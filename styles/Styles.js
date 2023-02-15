@@ -23,4 +23,16 @@ import { StyleSheet } from "react-native";
         },
       });
 
-    export {darkStyle, lightStyle};
+    const resultStyle = StyleSheet.create({
+        goodColor: {
+          color: 'green'
+        },
+        warningColor: {
+          color: 'yellow'
+        },
+        badColor: {
+          color: 'red'
+        }
+    });
+
+    export {darkStyle, lightStyle, resultStyle};
