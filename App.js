@@ -5,11 +5,8 @@ import {lightStyle, darkStyle} from './styles/Styles';
 
 export default function App() {
   return (
-      <ScrollView contentContainerStyle={lightStyle.container}>
-        <View>
-          <Text style={lightStyle.header}>Alcometer</Text>
+      <ScrollView>
           <Alcometer />
-        </View>
       </ScrollView>
   );
 }

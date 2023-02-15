@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import NumericInput from "react-native-numeric-input";
 
     const lightStyle = StyleSheet.create({
         container: {
@@ -6,21 +7,51 @@ import { StyleSheet } from "react-native";
           backgroundColor: '#fff',
           alignItems: 'center',
           justifyContent: 'center',
+          color: 'black'
         },
         header: {
             fontSize: 24,
+            marginBottom: 20
         },
         radioStyle: {
             flexDirection: 'row',
             alignItems: 'center'
+        },
+        textInputStyle: {
+          width: 380,
+          borderBottomWidth: 1,
+          backgroundColor: 'lightgrey',
+          marginBottom: 20
+        },
+        headingsStyle: {
+          fontSize: 20,
+          fontWeight: 'bold',
+          marginBottom: 10,
+          marginTop: 10
+        },
+        numInputStyle: {
+          backgroundColor: 'lightgrey'
         }
       });
 
     const darkStyle = StyleSheet.create({
         container: {
           ...lightStyle.container,
-          backgroundColor: '#000',
+          backgroundColor: '#212120',
+          color: 'white'
         },
+        header: {
+          ...lightStyle.header,
+          color: 'white'
+        },
+        textInputStyle: {
+          ...lightStyle.textInputStyle,
+          backgroundColor: 'ghostwhite'
+        },
+        headingsStyle: {
+          ...lightStyle.headingsStyle,
+          color: 'white'
+        }
       });
 
     const resultStyle = StyleSheet.create({

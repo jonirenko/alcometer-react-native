@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, Pressable, Text, View } from 'react-native';
+import { Alert, Pressable, Switch, Text, View } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import { RadioButton, TextInput } from 'react-native-paper';
 import { lightStyle, darkStyle, resultStyle } from '../styles/Styles';
@@ -10,6 +10,12 @@ export default function Alcometer() {
     const [hours, setHours] = useState(0);
     const [sex, setSex] = useState('');
     const [result, setResult] = useState(0);
+    const [isOn, setIsOn] = useState(false);
+
+    const container = isOn ? darkStyle.container : lightStyle.container; 
+    const header = isOn ? darkStyle.header : lightStyle.header;
+    const input = isOn ? darkStyle.textInputStyle : lightStyle.textInputStyle;
+    const headings = isOn ? darkStyle.headingsStyle : lightStyle. headingsStyle;
 
     const LITRES = bottles * 0.33;
     const GRAMS = LITRES * 8 * 4.5;
@@ -62,13 +68,63 @@ export default function Alcometer() {
     }
 
     return (
-        <View>
-            <Text>Weight</Text>
-            <TextInput keyboardType='decimal-pad' onChangeText={w => setWeight(w)}/>
-            <Text>Bottles</Text>
-            <NumericInput minValue={0} onChange={b => setBottles(b)}/>
-            <Text>Hours</Text>
-            <NumericInput minValue={0} onChange={h => setHours(h)}/>
+        <View style={container}>
+            <Switch
+            value={isOn}
+            onValueChange={t => setIsOn(t)}
+            />
+            <Text style={header}>Alcometer</Text>
+            <Text style={headings}>Weight</Text>
+            <TextInput style={input} keyboardType='decimal-pad' onChangeText={w => setWeight(w)}/>
+            <Text style={headings}>Bottles</Text>
+            {isOn ?
+                <NumericInput
+                minValue={0}
+                onChange={b => setBottles(b)}
+                rounded
+                totalWidth={170}
+                totalHeight={60}
+                rightButtonBackgroundColor='whitesmoke'
+                leftButtonBackgroundColor='whitesmoke'
+                containerStyle={{backgroundColor: 'ghostwhite'}}
+                />
+            : <NumericInput 
+                minValue={0}
+                onChange={b => setBottles(b)}
+                rounded
+                totalWidth={170}
+                totalHeight={60}
+                rightButtonBackgroundColor='grey'
+                leftButtonBackgroundColor='grey'
+                iconStyle={{color: 'white'}}
+                containerStyle={{backgroundColor: '#f0f0f0'}}
+                />
+            }
+            <Text style={headings}>Hours</Text>
+            {isOn ?
+            <NumericInput
+            minValue={0}
+            onChange={h => setHours(h)}
+            rounded
+            totalWidth={170}
+            totalHeight={60}
+            rightButtonBackgroundColor='whitesmoke'
+            leftButtonBackgroundColor='whitesmoke'
+            containerStyle={{backgroundColor: 'ghostwhite'}}
+            />
+            :
+            <NumericInput style={lightStyle.numInputStyle}
+            minValue={0}
+            onChange={h => setHours(h)}
+            rounded
+            totalWidth={170}
+            totalHeight={60}
+            rightButtonBackgroundColor='grey'
+            leftButtonBackgroundColor='grey'
+            iconStyle={{color: 'white'}}
+            containerStyle={{backgroundColor: '#f0f0f0'}}
+            />
+            }
             <RadioButton.Group onValueChange={s => setSex(s)} value={sex}>
                 <View style={lightStyle.radioStyle}>
                     <RadioButton value='male'/>
