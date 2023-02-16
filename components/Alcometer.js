@@ -15,7 +15,10 @@ export default function Alcometer() {
     const container = isOn ? darkStyle.container : lightStyle.container; 
     const header = isOn ? darkStyle.header : lightStyle.header;
     const input = isOn ? darkStyle.textInputStyle : lightStyle.textInputStyle;
-    const headings = isOn ? darkStyle.headingsStyle : lightStyle. headingsStyle;
+    const headings = isOn ? darkStyle.headingsStyle : lightStyle.headingsStyle;
+    const texts = isOn ? darkStyle.textStyle : lightStyle.textStyle;
+    const button = isOn ? darkStyle.buttonStyle : lightStyle.buttonStyle;
+    const scale = [{scaleX: 1.3},{scaleY: 1.3}];
 
     const LITRES = bottles * 0.33;
     const GRAMS = LITRES * 8 * 4.5;
@@ -72,6 +75,9 @@ export default function Alcometer() {
             <Switch
             value={isOn}
             onValueChange={t => setIsOn(t)}
+            thumbColor={isOn ? 'ghostwhite' : 'grey'}
+            trackColor={{true: 'ghostwhite'}}
+            style={{transform: scale}}
             />
             <Text style={header}>Alcometer</Text>
             <Text style={headings}>Weight</Text>
@@ -110,7 +116,7 @@ export default function Alcometer() {
             totalHeight={60}
             rightButtonBackgroundColor='whitesmoke'
             leftButtonBackgroundColor='whitesmoke'
-            containerStyle={{backgroundColor: 'ghostwhite'}}
+            containerStyle={{backgroundColor: 'ghostwhite', marginBottom:20}}
             />
             :
             <NumericInput style={lightStyle.numInputStyle}
@@ -122,25 +128,25 @@ export default function Alcometer() {
             rightButtonBackgroundColor='grey'
             leftButtonBackgroundColor='grey'
             iconStyle={{color: 'white'}}
-            containerStyle={{backgroundColor: '#f0f0f0'}}
+            containerStyle={{backgroundColor: '#f0f0f0', marginBottom:20}}
             />
             }
-            <RadioButton.Group onValueChange={s => setSex(s)} value={sex}>
+            <RadioButton.Group  onValueChange={s => setSex(s)} value={sex}>
                 <View style={lightStyle.radioStyle}>
-                    <RadioButton value='male'/>
-                    <Text>Male</Text>
+                    <RadioButton uncheckedColor='darkgoldenrod' color='yellowgreen' value='male'/>
+                    <Text style={texts}>Male</Text>
                 </View>
                 <View style={lightStyle.radioStyle}>
-                    <RadioButton value='female'/>
-                    <Text>Female</Text>
+                    <RadioButton uncheckedColor='darkgoldenrod' color='yellowgreen' value='female'/>
+                    <Text style={texts}>Female</Text>
                 </View>
             </RadioButton.Group>
-            <View>
-                <Text>Your blood alcohol level is</Text>
-                <Text>{returnResult()}</Text>
+            <View style={lightStyle.resultStyle}>
+                <Text style={texts}>Your blood alcohol level is</Text>
+                <Text style={lightStyle.textStyle}>{returnResult()}</Text>
             </View>
-            <Pressable onPress={calculateAlcoholLevel}>
-                <Text>Calculate</Text>
+            <Pressable style={button} onPress={calculateAlcoholLevel}>
+                <Text style={lightStyle.textStyle}>Calculate</Text>
             </Pressable>
         </View>
     );

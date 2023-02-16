@@ -1,8 +1,11 @@
 import { StyleSheet } from "react-native";
-import NumericInput from "react-native-numeric-input";
+import  Constants  from "expo-constants";
 
     const lightStyle = StyleSheet.create({
         container: {
+          marginTop: Constants.statusBarHeight,
+          paddingTop: 20,
+          paddingBottom: 100,
           flex: 1,
           backgroundColor: '#fff',
           alignItems: 'center',
@@ -15,7 +18,11 @@ import NumericInput from "react-native-numeric-input";
         },
         radioStyle: {
             flexDirection: 'row',
-            alignItems: 'center'
+            alignItems: 'center',
+        },
+        textStyle: {
+          fontSize: 18,
+          color: 'black'
         },
         textInputStyle: {
           width: 380,
@@ -31,7 +38,22 @@ import NumericInput from "react-native-numeric-input";
         },
         numInputStyle: {
           backgroundColor: 'lightgrey'
-        }
+        },
+        resultStyle: {
+          marginTop: 20,
+          marginBottom: 20,
+          alignItems: 'center'
+        },
+        buttonStyle: {
+          borderWidth: 2,
+          borderRadius: 4,
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 30,
+          paddingRight: 30,
+          backgroundColor: 'whitesmoke',
+          marginBottom: 20,
+        },
       });
 
     const darkStyle = StyleSheet.create({
@@ -51,6 +73,15 @@ import NumericInput from "react-native-numeric-input";
         headingsStyle: {
           ...lightStyle.headingsStyle,
           color: 'white'
+        },
+        textStyle: {
+          ...lightStyle.textStyle,
+          color: 'ghostwhite'
+        },
+        buttonStyle: {
+          ...lightStyle.buttonStyle,
+          backgroundColor: 'ghostwhite',
+          borderColor: 'darkgoldenrod'
         }
       });
 
@@ -59,11 +90,12 @@ import NumericInput from "react-native-numeric-input";
           color: 'green'
         },
         warningColor: {
-          color: 'yellow'
+          color: 'gold'
         },
         badColor: {
           color: 'red'
-        }
+        },
+        
     });
 
     export {darkStyle, lightStyle, resultStyle};
