@@ -5,7 +5,7 @@ import  Constants  from "expo-constants";
         container: {
           marginTop: Constants.statusBarHeight,
           paddingTop: 20,
-          paddingBottom: 100,
+          paddingBottom: 90,
           flex: 1,
           backgroundColor: '#fff',
           alignItems: 'center',
@@ -13,7 +13,7 @@ import  Constants  from "expo-constants";
           color: 'black'
         },
         header: {
-            fontSize: 24,
+            fontSize: 26,
             marginBottom: 20
         },
         radioStyle: {
@@ -43,6 +43,9 @@ import  Constants  from "expo-constants";
           marginTop: 20,
           marginBottom: 20,
           alignItems: 'center'
+        },
+        resultTextStyle: {
+          fontSize: 25,
         },
         buttonStyle: {
           borderWidth: 2,

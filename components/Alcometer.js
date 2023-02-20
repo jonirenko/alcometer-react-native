@@ -143,7 +143,7 @@ export default function Alcometer() {
             </RadioButton.Group>
             <View style={lightStyle.resultStyle}>
                 <Text style={texts}>Your blood alcohol level is</Text>
-                <Text style={lightStyle.textStyle}>{returnResult()}</Text>
+                <Text style={lightStyle.resultTextStyle}>{returnResult()}</Text>
             </View>
             <Pressable style={button} onPress={calculateAlcoholLevel}>
                 <Text style={lightStyle.textStyle}>Calculate</Text>
