@@ -5,6 +5,7 @@ import { RadioButton, TextInput } from 'react-native-paper';
 import { lightStyle, darkStyle, resultStyle } from '../styles/Styles';
 
 export default function Alcometer() {
+    // Declaring necessary state variables
     const [weight, setWeight] = useState(0);
     const [bottles, setBottles] = useState(0);
     const [hours, setHours] = useState(0);
@@ -12,6 +13,7 @@ export default function Alcometer() {
     const [result, setResult] = useState(0);
     const [isOn, setIsOn] = useState(false);
 
+    // Declaring the needed constants for styling and conditional rendering
     const container = isOn ? darkStyle.container : lightStyle.container; 
     const header = isOn ? darkStyle.header : lightStyle.header;
     const input = isOn ? darkStyle.textInputStyle : lightStyle.textInputStyle;
@@ -20,11 +22,13 @@ export default function Alcometer() {
     const button = isOn ? darkStyle.buttonStyle : lightStyle.buttonStyle;
     const scale = [{scaleX: 1.3},{scaleY: 1.3}];
 
+    // Constants needed for calculations
     const LITRES = bottles * 0.33;
     const GRAMS = LITRES * 8 * 4.5;
     const BURNING = weight / 10;
     const GRAMS_LEFT = GRAMS - BURNING * hours;
 
+    // Alert for missing weight input
     const showAlert = () => {
         Alert.alert(
             "Input missing: weight",
@@ -37,6 +41,7 @@ export default function Alcometer() {
         );
     }
 
+    // Function to calculate alcohol level based on chosen gender
     function calculateAlcoholLevel() {
         if (weight <= 0) {
             showAlert();
@@ -49,6 +54,7 @@ export default function Alcometer() {
         }
     }
 
+    // Showing the result of the calculation in different colors depending on the result
     function returnResult() {
         if (result < 0) {
             setResult(0);
@@ -72,6 +78,7 @@ export default function Alcometer() {
 
     return (
         <View style={container}>
+            {/* Switch component to toggle dark mode */}
             <Switch
             value={isOn}
             onValueChange={t => setIsOn(t)}
@@ -83,6 +90,7 @@ export default function Alcometer() {
             <Text style={headings}>Weight</Text>
             <TextInput style={input} keyboardType='decimal-pad' onChangeText={w => setWeight(w)}/>
             <Text style={headings}>Bottles</Text>
+            {/* Numeric input styling changes based on wether the switch is on or off */}
             {isOn ?
                 <NumericInput
                 minValue={0}
